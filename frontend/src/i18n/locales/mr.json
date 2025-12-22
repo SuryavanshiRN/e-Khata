@@ -1,0 +1,138 @@
+{
+  "common": {
+    "welcome": "स्वागत आहे",
+    "loading": "लोड होत आहे...",
+    "error": "त्रुटी",
+    "success": "यश",
+    "save": "सेव्ह करा",
+    "cancel": "रद्द करा",
+    "delete": "हटवा",
+    "edit": "संपादित करा",
+    "add": "जोडा",
+    "search": "शोधा",
+    "filter": "फिल्टर",
+    "export": "निर्यात",
+    "import": "आयात",
+    "close": "बंद करा",
+    "submit": "सबमिट करा",
+    "back": "मागे",
+    "next": "पुढे",
+    "confirm": "पुष्टी करा",
+    "logout": "लॉगआउट"
+  },
+  "auth": {
+    "login": "लॉगिन",
+    "register": "नोंदणी",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "name": "नाव",
+    "confirmPassword": "पासवर्डची पुष्टी करा",
+    "forgotPassword": "पासवर्ड विसरलात?",
+    "noAccount": "खाते नाही?",
+    "hasAccount": "आधीच खाते आहे?",
+    "signIn": "साइन इन करा",
+    "signUp": "साइन अप करा",
+    "welcomeBack": "परत स्वागत आहे!",
+    "startJourney": "तुमचा प्रवास सुरू करा!",
+    "loginTagline": "तुमच्या खर्चाच्या डॅशबोर्डवर प्रवेश करण्यासाठी साइन इन करा",
+    "registerTagline": "तुमचे खर्च ट्रॅक करण्यासाठी खाते तयार करा"
+  },
+  "dashboard": {
+    "title": "डॅशबोर्ड",
+    "overview": "आढावा",
+    "expenses": "खर्च",
+    "income": "उत्पन्न",
+    "balance": "शिल्लक",
+    "thisMonth": "या महिन्यात",
+    "lastMonth": "मागील महिन्यात",
+    "totalExpenses": "एकूण खर्च",
+    "totalIncome": "एकूण उत्पन्न",
+    "netSavings": "निव्वळ बचत",
+    "recentExpenses": "अलीकडील खर्च",
+    "topCategories": "शीर्ष श्रेणी",
+    "statistics": "आकडेवारी"
+  },
+  "expense": {
+    "addExpense": "खर्च जोडा",
+    "editExpense": "खर्च संपादित करा",
+    "deleteExpense": "खर्च हटवा",
+    "title": "शीर्षक",
+    "amount": "रक्कम",
+    "category": "श्रेणी",
+    "date": "तारीख",
+    "description": "वर्णन",
+    "tags": "टॅग",
+    "recurring": "आवर्ती",
+    "oneTime": "एकदा",
+    "frequency": "वारंवारता",
+    "smartAdd": "स्मार्ट जोडा",
+    "aiDetected": "एआय द्वारे शोधले",
+    "enterExpense": "खर्चाचा तपशील प्रविष्ट करा..."
+  },
+  "categories": {
+    "Food": "अन्न",
+    "Transport": "वाहतूक",
+    "Entertainment": "मनोरंजन",
+    "Shopping": "खरेदी",
+    "Bills": "बिले",
+    "Health": "आरोग्य",
+    "Education": "शिक्षण",
+    "Other": "इतर"
+  },
+  "advisor": {
+    "title": "आर्थिक सल्लागार",
+    "askQuestion": "प्रश्न विचारा...",
+    "suggestedQuestions": "सुचवलेले प्रश्न",
+    "typing": "टाइप करत आहे...",
+    "aiResponse": "एआय प्रतिसाद",
+    "insights": "अंतर्दृष्टी",
+    "recommendations": "शिफारसी"
+  },
+  "recurring": {
+    "title": "आवर्ती खर्च",
+    "addRecurring": "आवर्ती खर्च जोडा",
+    "frequency": "वारंवारता",
+    "daily": "दररोज",
+    "weekly": "साप्ताहिक",
+    "monthly": "मासिक",
+    "yearly": "वार्षिक",
+    "nextDue": "पुढील देय",
+    "active": "सक्रिय",
+    "inactive": "निष्क्रिय"
+  },
+  "settings": {
+    "title": "सेटिंग्ज",
+    "language": "भाषा",
+    "theme": "थीम",
+    "currency": "चलन",
+    "notifications": "सूचना",
+    "privacy": "गोपनीयता",
+    "account": "खाते"
+  },
+  "navbar": {
+    "dashboard": "डॅशबोर्ड",
+    "recurring": "आवर्ती",
+    "advisor": "सल्लागार",
+    "profile": "प्रोफाइल",
+    "settings": "सेटिंग्ज"
+  },
+  "greeting": {
+    "morning": "सुप्रभात",
+    "afternoon": "नमस्कार",
+    "evening": "शुभ संध्याकाळ",
+    "night": "शुभ रात्री"
+  },
+  "messages": {
+    "expenseAdded": "खर्च यशस्वीरित्या जोडला गेला",
+    "expenseUpdated": "खर्च यशस्वीरित्या अपडेट झाला",
+    "expenseDeleted": "खर्च यशस्वीरित्या हटवला गेला",
+    "error": "काहीतरी चूक झाली. कृपया पुन्हा प्रयत्न करा.",
+    "networkError": "नेटवर्क त्रुटी. कृपया तुमचे कनेक्शन तपासा.",
+    "invalidInput": "अवैध इनपुट. कृपया तुमचा डेटा तपासा."
+  },
+  "languages": {
+    "en": "English",
+    "hi": "हिन्दी",
+    "mr": "मराठी"
+  }
+}

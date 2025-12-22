@@ -1,0 +1,138 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import",
+    "close": "Close",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "confirm": "Confirm",
+    "logout": "Logout"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "welcomeBack": "Welcome Back!",
+    "startJourney": "Start Your Journey!",
+    "loginTagline": "Sign in to access your expense dashboard",
+    "registerTagline": "Create an account to start tracking your expenses"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "overview": "Overview",
+    "expenses": "Expenses",
+    "income": "Income",
+    "balance": "Balance",
+    "thisMonth": "This Month",
+    "lastMonth": "Last Month",
+    "totalExpenses": "Total Expenses",
+    "totalIncome": "Total Income",
+    "netSavings": "Net Savings",
+    "recentExpenses": "Recent Expenses",
+    "topCategories": "Top Categories",
+    "statistics": "Statistics"
+  },
+  "expense": {
+    "addExpense": "Add Expense",
+    "editExpense": "Edit Expense",
+    "deleteExpense": "Delete Expense",
+    "title": "Title",
+    "amount": "Amount",
+    "category": "Category",
+    "date": "Date",
+    "description": "Description",
+    "tags": "Tags",
+    "recurring": "Recurring",
+    "oneTime": "One Time",
+    "frequency": "Frequency",
+    "smartAdd": "Smart Add",
+    "aiDetected": "AI Detected",
+    "enterExpense": "Enter expense details..."
+  },
+  "categories": {
+    "Food": "Food",
+    "Transport": "Transport",
+    "Entertainment": "Entertainment",
+    "Shopping": "Shopping",
+    "Bills": "Bills",
+    "Health": "Health",
+    "Education": "Education",
+    "Other": "Other"
+  },
+  "advisor": {
+    "title": "Financial Advisor",
+    "askQuestion": "Ask a question...",
+    "suggestedQuestions": "Suggested Questions",
+    "typing": "Typing...",
+    "aiResponse": "AI Response",
+    "insights": "Insights",
+    "recommendations": "Recommendations"
+  },
+  "recurring": {
+    "title": "Recurring Expenses",
+    "addRecurring": "Add Recurring Expense",
+    "frequency": "Frequency",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "nextDue": "Next Due",
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "currency": "Currency",
+    "notifications": "Notifications",
+    "privacy": "Privacy",
+    "account": "Account"
+  },
+  "navbar": {
+    "dashboard": "Dashboard",
+    "recurring": "Recurring",
+    "advisor": "Advisor",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "greeting": {
+    "morning": "Good Morning",
+    "afternoon": "Good Afternoon",
+    "evening": "Good Evening",
+    "night": "Good Night"
+  },
+  "messages": {
+    "expenseAdded": "Expense added successfully",
+    "expenseUpdated": "Expense updated successfully",
+    "expenseDeleted": "Expense deleted successfully",
+    "error": "Something went wrong. Please try again.",
+    "networkError": "Network error. Please check your connection.",
+    "invalidInput": "Invalid input. Please check your data."
+  },
+  "languages": {
+    "en": "English",
+    "hi": "हिन्दी",
+    "mr": "मराठी"
+  }
+}

@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment variables
+.env
+backend/.env
+frontend/.env
+
+# Build outputs
+dist/
+build/
+
+# Logs
+*.log
+backend/backend.log
+frontend/frontend.log
+
+# Uploads
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testing
+coverage/
+
+# Misc
+.cache/
+tmp/
+*:Zone.Identifier
