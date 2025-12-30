@@ -40,10 +40,15 @@ Expense Manager 2/
 ├── 📄 README.md                       # Main documentation (you are here)
 │
 ├── 🔧 Scripts
-│   ├── start.sh                       # Start all servers
-│   ├── stop.sh                        # Stop all servers
-│   ├── setup.sh                       # Initial project setup
-│   └── push-to-github.sh              # GitHub repository setup
+│   ├── start.sh                       # Start all servers (Linux/Mac)
+│   ├── start.bat                      # Start all servers (Windows)
+│   ├── stop.sh                        # Stop all servers (Linux/Mac)
+│   ├── stop.bat                       # Stop all servers (Windows)
+│   ├── setup.sh                       # Initial project setup (Linux/Mac)
+│   ├── setup.bat                      # Initial project setup (Windows)
+│   ├── push-to-github.sh              # GitHub repository setup (Linux/Mac)
+│   ├── push-to-github.bat             # GitHub repository setup (Windows)
+│   └── WINDOWS_SETUP.md               # Windows setup guide
 │
 ├── 🧪 testing/                        # All test scripts
 │   ├── test-*.sh                      # Test shell scripts
@@ -155,8 +160,14 @@ Expense Manager 2/
 
 ### ⚡ One-Command Setup
 
+**For Linux/Mac:**
 ```bash
 ./start.sh
+```
+
+**For Windows:**
+```cmd
+start.bat
 ```
 
 This will:
@@ -165,10 +176,18 @@ This will:
 3. ✅ Start backend server (http://localhost:5000)
 4. ✅ Start frontend server (http://localhost:3000)
 
+> **Windows Users**: See [WINDOWS_SETUP.md](WINDOWS_SETUP.md) for detailed Windows setup guide
+
 ### 🛑 Stop All Servers
 
+**For Linux/Mac:**
 ```bash
 ./stop.sh
+```
+
+**For Windows:**
+```cmd
+stop.bat
 ```
 
 ---
