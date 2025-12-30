@@ -66,8 +66,9 @@ You can ask me about:
     try {
       const response = await getFinancialAdvice(userMessage.text);
 
+      // The API returns { success, advice, isAi, stats } directly
       const adviceText =
-        response?.data?.advice?.trim() ||
+        response?.advice?.trim() ||
         '🤖 I need more financial data to give a useful answer.';
 
       const aiMessage = {
@@ -75,7 +76,7 @@ You can ask me about:
         type: 'ai',
         text: enhanceShortAnswer(adviceText),
         timestamp: new Date(),
-        trends: response?.data?.trends,
+        isAi: response?.isAi || false,
       };
 
       setMessages((prev) => [...prev, aiMessage]);

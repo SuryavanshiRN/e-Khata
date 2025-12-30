@@ -280,7 +280,7 @@ const EMICalculator = () => {
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
             Amortization Schedule
           </h3>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto max-h-[600px] overflow-y-auto custom-scrollbar">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-gray-200 dark:border-gray-700">
@@ -292,13 +292,7 @@ const EMICalculator = () => {
                 </tr>
               </thead>
               <tbody>
-                {result.amortizationSchedule
-                  .filter((_, index) => {
-                    // Show all for <= 5 years, otherwise show yearly
-                    if (inputs.months <= 60) return true;
-                    return index % 12 === 0 || index === result.amortizationSchedule.length - 1;
-                  })
-                  .map((item, index) => (
+                {result.amortizationSchedule.map((item, index) => (
                     <tr
                       key={index}
                       className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
@@ -321,11 +315,6 @@ const EMICalculator = () => {
               </tbody>
             </table>
           </div>
-          {inputs.months > 60 && (
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
-              * Showing yearly summary. Full schedule contains {result.amortizationSchedule.length} monthly payments.
-            </p>
-          )}
         </motion.div>
       )}
     </div>

@@ -1,20 +1,21 @@
 const { createWorker } = require('tesseract.js');
 const sharp = require('sharp');
 const fs = require('fs/promises');
+const geminiService = require('../services/geminiService');
 
 let worker = null;
 
-// Initialize OCR worker
+// Initialize OCR worker (Tesseract Fallback)
 const initWorker = async () => {
   if (!worker) {
-    console.log('🔧 Initializing OCR worker...');
+    console.log('🔧 Initializing Tesseract worker...');
     worker = createWorker();
-    console.log('✅ OCR worker ready');
+    console.log('✅ Tesseract worker ready');
   }
   return worker;
 };
 
-// Preprocess image to improve OCR
+// Preprocess image to improve Tesseract OCR
 const preprocessImage = async (inputPath) => {
   try {
     const outputPath = inputPath.replace(/\.(jpg|jpeg|png|webp)$/i, '_ocr.png');
@@ -28,34 +29,34 @@ const preprocessImage = async (inputPath) => {
 
     return outputPath;
   } catch (err) {
-    console.error('⚠️ Sharp preprocessing failed, using original image:', err.message);
+    console.error('⚠️ Sharp preprocessing failed:', err.message);
     return inputPath;
   }
 };
 
-// Extract text using Tesseract
+// Extract text using Tesseract (Fallback)
 const extractTextFromImage = async (imagePath) => {
   const processedPath = await preprocessImage(imagePath);
   const ocrWorker = await initWorker();
 
-  const { data: { text } } = await ocrWorker.recognize(processedPath, {
-    lang: 'eng',
-    tessedit_char_whitelist: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789₹.,- ',
-    tessedit_pageseg_mode: 6, // single uniform block of text
-  });
+  try {
+    const { data: { text } } = await ocrWorker.recognize(processedPath, {
+      lang: 'eng',
+      tessedit_char_whitelist: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789₹.,- ',
+      tessedit_pageseg_mode: 6,
+    });
 
-  if (processedPath !== imagePath) {
-    await fs.unlink(processedPath).catch(() => {});
+    return text.trim();
+  } finally {
+    if (processedPath !== imagePath) {
+      await fs.unlink(processedPath).catch(() => {});
+    }
   }
-
-  return text.trim();
 };
 
-// Parse receipt text
-const parseReceiptData = (text) => {
+// Parse receipt text (Rule-based Fallback)
+const parseReceiptDataMock = (text) => {
   const lower = text.toLowerCase();
-
-  // Flexible amount detection
   const amountRegexes = [
     /total\s*[:\-]?\s*₹?\s*([\d.,]+)/i,
     /amount\s*[:\-]?\s*₹?\s*([\d.,]+)/i,
@@ -90,15 +91,14 @@ const parseReceiptData = (text) => {
   const lines = text.split('\n').filter((l) => l.trim().length > 3);
   let merchant = lines[0]
     ? lines[0].replace(/[^a-zA-Z0-9 ]/g, '')
-        .replace(/\bCe be\b/i, 'Cafe Aroma')
         .trim()
     : 'Unknown Merchant';
 
   return {
-    title: merchant,
     merchant,
     amount,
     category,
+    title: merchant
   };
 };
 
@@ -109,32 +109,55 @@ const processReceipt = async (req, res) => {
       return res.status(400).json({ success: false, error: 'No image uploaded' });
     }
 
-    console.log('✅ OCR HIT', req.file.filename);
+    console.log('📸 Processing Receipt:', req.file.filename);
+    
+    let resultData = null;
+    let method = 'ai';
 
-    const text = await extractTextFromImage(req.file.path);
-    await fs.unlink(req.file.path).catch(() => {});
-
-    if (!text || text.length < 20) {
-      return res.status(400).json({
-        success: false,
-        error: 'OCR failed. Please upload a clearer image.',
-      });
+    // 1. Try Gemini AI first
+    if (process.env.GOOGLE_AI_API_KEY) {
+      try {
+        const buffer = await fs.readFile(req.file.path);
+        const geminiResult = await geminiService.parseReceipt(buffer, req.file.mimetype);
+        
+        resultData = {
+          ...geminiResult,
+          title: geminiResult.merchant || 'New Expense',
+          rawText: 'AI Parsed'
+        };
+      } catch (err) {
+        console.error('⚠️ Gemini OCR failed, falling back to Tesseract:', err.message);
+      }
     }
 
-    const parsed = parseReceiptData(text);
+    // 2. Fallback to Tesseract + Heuristics
+    if (!resultData) {
+      method = 'tesseract';
+      const text = await extractTextFromImage(req.file.path);
+      const parsed = parseReceiptDataMock(text);
+      
+      resultData = {
+        ...parsed,
+        rawText: text,
+        confidence: 70,
+        items: []
+      };
+    }
+
+    // Cleanup uploaded file
+    await fs.unlink(req.file.path).catch(() => {});
 
     res.json({
       success: true,
       data: {
-        ...parsed,
-        rawText: text,
-        confidence: 90,
-        items: [],
-        date: new Date().toISOString().split('T')[0],
+        ...resultData,
+        method,
+        date: resultData.date || new Date().toISOString().split('T')[0],
       },
     });
   } catch (err) {
     console.error('❌ OCR ERROR:', err);
+    if (req.file) await fs.unlink(req.file.path).catch(() => {});
     res.status(500).json({ success: false, error: err.message || 'OCR processing failed' });
   }
 };

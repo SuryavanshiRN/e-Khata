@@ -113,20 +113,18 @@ exports.calculateEMI = async (req, res) => {
       const principalPayment = emi - interestPayment;
       balance -= principalPayment;
       
-      if (totalMonths <= 60 || month % 12 === 0 || month === 1 || month === totalMonths) {
-        amortizationSchedule.push({
-          month,
-          emi: Math.round(emi),
-          principal: Math.round(principalPayment),
-          interest: Math.round(interestPayment),
-          balance: Math.round(Math.max(0, balance))
-        });
-      }
+      amortizationSchedule.push({
+        month,
+        emi: Math.round(emi),
+        principalPayment: Math.round(principalPayment),
+        interestPayment: Math.round(interestPayment),
+        balance: Math.round(Math.max(0, balance))
+      });
     }
     
     const result = {
       type: 'EMI',
-      principal: principalAmount,
+      totalPrincipal: principalAmount,
       annualRate,
       months: totalMonths,
       years: parseFloat((totalMonths / 12).toFixed(1)),

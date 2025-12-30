@@ -130,23 +130,48 @@ const SmartAddExpense = ({ onExpenseDetected }) => {
       setLoading(true);
       setError('');
       
-      const result = await aiAPI.categorizeExpense(text, i18n.language);
+      // Use AI to parse full expense details from natural language
+      const result = await aiAPI.parseExpenseText(text, i18n.language);
       
-      if (result.success) {
-        // Show success animation
-        setShowSuccess(true);
-        
-        // Call parent callback with extracted data
-        onExpenseDetected(result.data);
-        
-        // Clear input
-        setText('');
-        
-        // Hide success after 1 second
-        setTimeout(() => setShowSuccess(false), 1000);
+      let expenseData;
+      
+      if (result.success && result.data) {
+        // Use AI-parsed data
+        expenseData = {
+          title: result.data.title || text.trim(),
+          category: result.data.category || 'Other',
+          amount: result.data.amount || 0,
+          description: result.data.description || text.trim(),
+          date: result.data.date || new Date().toISOString().split('T')[0]
+        };
+        console.log('✅ AI parsed expense:', result.source, expenseData);
       } else {
-        setError(result.error || 'Failed to categorize expense');
+        // Fallback to local parsing
+        const localParsed = parseTextLocally(text);
+        expenseData = {
+          title: text.trim(),
+          category: localParsed.category || 'Other',
+          amount: localParsed.amount || 0,
+          description: localParsed.description || text.trim(),
+          date: new Date().toISOString().split('T')[0]
+        };
+        console.log('⚠️ Using local parsing:', expenseData);
       }
+      
+      // Show success animation
+      setShowSuccess(true);
+      
+      // Call parent callback with extracted data
+      onExpenseDetected(expenseData);
+      
+      // Clear input
+      setText('');
+      setParsedHints(null);
+      setSuggestedCategories([]);
+      setConfidence(0);
+      
+      // Hide success after 1 second
+      setTimeout(() => setShowSuccess(false), 1000);
     } catch (err) {
       console.error('Smart add error:', err);
       setError('Failed to process your text. Please try again.');
